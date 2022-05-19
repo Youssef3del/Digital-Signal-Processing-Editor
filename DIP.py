@@ -35,14 +35,18 @@ def contrast():
 
 def GSApproch1():
     global done,last_label
-    done = function.GSApproch1(image_path)
+    GS_from = int(entry4.get())
+    GS_to = int(entry5.get())
+    done = function.GSApproch1(image_path,GS_from,GS_to)
     last_label ="GrayScale Approch1"
     var2.set(last_label)
     SecondImage()
     
 def GSApproch2():
-    global done
-    done = function.GSApproch2(image_path)
+    global done,last_label
+    GS_from = int(entry4.get())
+    GS_to = int(entry5.get())
+    done = function.GSApproch2(image_path,GS_from,GS_to)
     last_label ="GrayScale Approch2"
     var2.set(last_label)
     SecondImage()    
@@ -156,68 +160,80 @@ def save():
         
 ws = Tk()
 ws.title("Image processing")
-ws.geometry("840x750")
+ws.geometry("840x760")
 ws.configure(bg='#85929E')  
 # ws.iconbitmap('python.png')
                            
 button1 = Button(ws, text="Select Image", bg='#52BE80', fg='black', font=('ariel 15 bold'),cursor="hand2" ,relief=GROOVE, command=selected)
-button1.place(x=60, y=700)
+button1.place(x=60, y=705)
 button2 = Button(ws, text="Save", width=12, bg='#D6EAF8', fg='black', font=('ariel 15 bold'),cursor="hand2", relief=GROOVE, command=save)
-button2.place(x=440, y=700)
+button2.place(x=440, y=705)
 button3 = Button(ws, text="Exit", width=12, bg='#CD6155', fg='black', font=('ariel 15 bold'),cursor="hand2", relief=GROOVE, command=ws.destroy)
-button3.place(x=660, y=700)
+button3.place(x=660, y=705)
 button4 = Button(ws, text="Reuse", width=12, bg='#afafaf', fg='black', font=('ariel 15 bold'),cursor="hand2", relief=GROOVE, command=reuse)
-button4.place(x=250, y=700)
+button4.place(x=250, y=705)
 
-Button( ws,text='Gray Scaling',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= GrayScaling).place(x=30, y=12)
-Button( ws,text='ContrastStretch',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= contrast).place(x=30, y=70)
-Button( ws,text='Negative Image',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= Negative).place(x=30, y=125)
-Button( ws,text='Log Image',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= log).place(x=225, y=12)
-Button( ws,text='power low',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= power).place(x=225, y=70)
-Button( ws,text='Median Filter',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= medianFilter).place(x=225, y=125)
-Button( ws,text='GS Approch1',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= GSApproch1).place(x=420, y=12)
-Button( ws,text='GS Approch2',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= GSApproch2).place(x=420, y=70)
-Button( ws,text='Avarage',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= Avarage).place(x=420, y=125)
-Button( ws,text='Adding',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= add).place(x=615, y=12)
-Button( ws,text='Gray Image',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= GrayImage).place(x=615, y=70)
-Button( ws,text='Sharping',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= sharp).place(x=615, y=125)
+Button( ws,text='Gray Scaling',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= GrayScaling).place(x=30, y=7)
+Button( ws,text='ContrastStretch',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= contrast).place(x=30, y=60)
+Button( ws,text='Negative Image',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= Negative).place(x=30, y=113)
+Button( ws,text='Log Image',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= log).place(x=225, y=7)
+Button( ws,text='power low',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= power).place(x=225, y=60)
+Button( ws,text='Median Filter',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= medianFilter).place(x=225, y=113)
+Button( ws,text='GS Approch1',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= GSApproch1).place(x=420, y=7)
+Button( ws,text='GS Approch2',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= GSApproch2).place(x=420, y=60)
+Button( ws,text='Avarage',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= Avarage).place(x=420, y=113)
+Button( ws,text='Adding',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= add).place(x=615, y=7)
+Button( ws,text='Gray Image',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= GrayImage).place(x=615, y=60)
+Button( ws,text='Sharping',width=12,font=("ariel 17 bold"),bg='#3498DB',cursor="hand2",command= sharp).place(x=615, y=113)
 
 canvas2 = Canvas(ws, width="400", height="400", relief=RIDGE, bd=2)
-canvas2.place(x=10, y=230)
+canvas2.place(x=10, y=210)
 canvas3 = Canvas(ws, width="400", height="400", relief=RIDGE, bd=2)
-canvas3.place(x=420, y=230)
+canvas3.place(x=420, y=210)
 
 var1 = StringVar()
 label1 = Label( ws, textvariable=var1, relief=RAISED,font=("ariel 17 bold") ,bg="#17202A",fg="#F0F3F4")
 var1.set("Origional Image")
-label1.place(x=100, y=190)
+label1.place(x=100, y=170)
 
 var2 = StringVar()
 label2 = Label( ws, textvariable=var2, relief=RAISED,font=("ariel 17 bold"),bg="#17202A",fg="#F0F3F4" )
 var2.set("Second Image")
-label2.place(x=540, y=190)
+label2.place(x=540, y=170)
 
 Directory = StringVar()
-Label(ws,text='Image path:',font="ariel 15 bold",bg="#17202A",fg="#F0F3F4").place(x=20,y=650)
-entry = Entry(ws, font="ariel 15",textvariable=Directory,width=30).place(x=140,y=650)
+Label(ws,text='Image path:',font="ariel 15 bold",bg="#17202A",fg="#F0F3F4").place(x=58,y=664)
+entry = Entry(ws, font="ariel 15",textvariable=Directory,width=50).place(x=180,y=664)
 
 values = [1, 2, 3, 4, 5, 6, 7, 8]
 scale_n = ttk.Combobox(ws, values=values, font=('ariel 15 bold'),width=2)
 scale_n.insert('0', values[0])
-scale_n.place(x=520, y=650)
-Label(ws, text="K:", font=("ariel 15 bold"),bg="#17202A",fg="#F0F3F4").place(x=490, y=650)
+scale_n.place(x=50, y=627)
+Label(ws, text="K:", font=("ariel 15 bold"),bg="#17202A",fg="#F0F3F4").place(x=20, y=627)
 
 values2 = [10, 30, 50, 80 , 100]
-Label(ws,text='Add:',font="ariel 15 bold",bg="#17202A",fg="#F0F3F4").place(x=580,y=650)
-entry2 = ttk.Combobox(ws, font="ariel 15",values=values2,width=3)
-entry2.place(x=630,y=650)
+Label(ws,text='Add:',font="ariel 15 bold",bg="#17202A",fg="#F0F3F4").place(x=125,y=627)
+entry2 = ttk.Combobox(ws, font="ariel 15",values=values2,width=4)
+entry2.place(x=180,y=627)
 entry2.insert('0', values2[0])
 
 values3 = [0.1, 0.3, 0.5, 0.8, 1.2, 1.5, 2]
-Label(ws,text='Gamma:',font="ariel 15 bold",bg="#17202A",fg="#F0F3F4").place(x=695,y=650)
+Label(ws,text='Gamma:',font="ariel 15 bold",bg="#17202A",fg="#F0F3F4").place(x=275,y=627)
 entry3 = ttk.Combobox(ws, font="ariel 15",values=values3,width=3)
-entry3.place(x=780,y=650)
+entry3.place(x=365,y=627)
 entry3.insert('0', values3[0])
+
+values4 = [10, 30, 50, 80 , 100]
+Label(ws,text='GS from:',font="ariel 15 bold",bg="#17202A",fg="#F0F3F4").place(x=460,y=627)
+entry4 = ttk.Combobox(ws, font="ariel 15",values=values4,width=3)
+entry4.place(x=555,y=627)
+entry4.insert('0', values4[4])
+
+values5 = [150, 180, 200, 220, 255]
+Label(ws,text='GS To:',font="ariel 15 bold",bg="#17202A",fg="#F0F3F4").place(x=653,y=627)
+entry5 = ttk.Combobox(ws, font="ariel 15",values=values5,width=3)
+entry5.place(x=730,y=627)
+entry5.insert('0', values5[2])
 
 ws.mainloop()
 
